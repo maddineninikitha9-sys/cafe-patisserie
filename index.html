@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Petit Café - Artisan Café & Patisserie</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FAF8F3;
+            --charcoal: #2C2C2C;
+            --terracotta: #C97C5D;
+            --forest: #5D8A66;
+            --gold: #D4A574;
+            --light-gray: #E8E6E1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--charcoal) 0%, #3d3d3d 100%);
+            color: var(--cream);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        .store-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+        }
+
+        .store-subtitle {
+            font-size: 1.1rem;
+            color: var(--gold);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--cream);
+            padding: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 124px;
+            z-index: 99;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .nav a {
+            color: var(--charcoal);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.5rem 1rem;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: var(--terracotta);
+            border-bottom-color: var(--terracotta);
+        }
+
+        /* Hero Banner */
+        .hero {
+            background: linear-gradient(rgba(44, 44, 44, 0.3), rgba(44, 44, 44, 0.3)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23C97C5D" width="1200" height="400"/><circle cx="200" cy="100" r="80" fill="%235D8A66" opacity="0.3"/><circle cx="900" cy="300" r="120" fill="%23D4A574" opacity="0.2"/><circle cx="600" cy="200" r="150" fill="%232C2C2C" opacity="0.1"/></svg>');
+            background-size: cover;
+            background-position: center;
+            padding: 6rem 2rem;
+            text-align: center;
+            color: white;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            max-width: 700px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Menu Sections */
+        .menu-category {
+            margin-bottom: 5rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .category-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--terracotta);
+            margin-bottom: 0.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 3px;
+            background: var(--forest);
+        }
+
+        .category-description {
+            font-size: 1.1rem;
+            color: #666;
+            margin-top: 1.5rem;
+            font-style: italic;
+        }
+
+        /* Menu Grid */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .menu-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            border-left: 4px solid var(--terracotta);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: var(--light-gray);
+            border-radius: 0 0 0 100%;
+            opacity: 0.3;
+            transition: all 0.4s ease;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+        }
+
+        .menu-card:hover::before {
+            width: 150px;
+            height: 150px;
+        }
+
+        .item-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--charcoal);
+            margin-bottom: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-price {
+            font-size: 1.4rem;
+            color: var(--terracotta);
+            font-weight: 700;
+        }
+
+        .item-description {
+            color: #555;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .item-options {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--light-gray);
+        }
+
+        .option-label {
+            font-weight: 700;
+            color: var(--forest);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .option-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .option-tag {
+            background: var(--light-gray);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--charcoal);
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .option-tag:hover {
+            background: var(--terracotta);
+            color: white;
+            border-color: var(--terracotta);
+        }
+
+        /* Special Offers Section */
+        .special-offers {
+            background: linear-gradient(135deg, var(--forest) 0%, #6d9d77 100%);
+            padding: 4rem 2rem;
+            margin: 4rem 0;
+            color: white;
+            animation: fadeIn 1.4s ease-out;
+        }
+
+        .special-offers h2 {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .offer-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 2px solid rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .offer-card:hover {
+            background: rgba(255,255,255,0.25);
+            transform: scale(1.05);
+        }
+
+        .offer-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+
+        .offer-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Store Info */
+        .store-info {
+            background: var(--charcoal);
+            color: var(--cream);
+            padding: 4rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .info-block h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .info-block p {
+            margin-bottom: 0.8rem;
+            line-height: 1.8;
+        }
+
+        .info-block a {
+            color: var(--terracotta);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .info-block a:hover {
+            color: var(--gold);
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: var(--cream);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .footer p {
+            opacity: 0.8;
+        }
+
+        .social-links {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--terracotta);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .store-name {
+                font-size: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav {
+                gap: 1rem;
+                top: 108px;
+            }
+
+            .category-title {
+                font-size: 2rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <h1 class="store-name">Le Petit Café</h1>
+        <p class="store-subtitle">Café & Patisserie</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="#coffee">Coffee</a>
+        <a href="#pastries">Pastries</a>
+        <a href="#breakfast">Breakfast</a>
+        <a href="#lunch">Lunch</a>
+        <a href="#desserts">Desserts</a>
+        <a href="#beverages">Beverages</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Authentic French-Inspired Experience</h1>
+        <p>Handcrafted coffee, artisan pastries, and fresh cuisine made with love daily</p>
+    </section>
+
+    <!-- Menu Content -->
+    <div class="container">
+        
+        <!-- Coffee Menu -->
+        <section id="coffee" class="menu-category">
+            <div class="category-header">
+                <h2 class="category-title">Coffee Specialties</h2>
+                <p class="category-description">Expertly roasted beans from around the world</p>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Espresso</span>
+                        <span class="item-price">$3.50</span>
+                    </div>
+                    <p class="item-description">Rich, bold shot of pure coffee perfection. Single or double shot available.</p>
+                    <div class="item-options">
+                        <span class="option-label">Size Options:</span>
+                        <div class="option-list">
+                            <span class="option-tag">Single</span>
+                            <span class="option-tag">Double (+$1.50)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Cappuccino</span>
+                        <span class="item-price">$4.75</span>
+                    </div>
+                    <p class="item-description">Perfect balance of espresso, steamed milk, and velvety foam.</p>
+                    <div class="item-options">
+                        <span class="option-label">Sizes:</span>
+                        <div class="option-list">
+                            <span class="option-tag">8oz</span>
+                            <span class="option-tag">12oz (+$1)</span>
+                            <span class="option-tag">16oz (+$1.50)</span>
+                        </div>
+                    </div>
+                    <div class="item-options">
+                        <span class="option-label">Milk Options:</span>
+                        <div class="option-list">
+                            <span class="option-tag">Whole</span>
+                            <span class="option-tag">Skim</span>
+                            <span class="option-tag">Oat (+$0.75)</span>
+                            <span class="option-tag">Almond (+$0.75)</span>
+                            <span class="option-tag">Soy (+$0.75)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Café Latte</span>
+                        <span class="item-price">$4.95</span>
+                    </div>
+                    <p class="item-description">Smooth espresso with steamed milk and a light layer of foam.</p>
+                    <div class="item-options">
+                        <span class="option-label">Flavor Shots (+$0.75):</span>
+                        <div class="option-list">
+                            <span class="option-tag">Vanilla</span>
+                            <span class="option-tag">Caramel</span>
+                            <span class="option-tag">Hazelnut</span>
+                            <span class="option-tag">Lavender</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Cold Brew</span>
+                        <span class="item-price">$5.25</span>
+                    </div>
+                    <p class="item-description">Slow-steeped for 16 hours. Smooth, naturally sweet, and refreshing.</p>
+                    <div class="item-options">
+                        <span class="option-label">Add-ons:</span>
+                        <div class="option-list">
+                            <span class="option-tag">Cream (+$0.50)</span>
+                            <span class="option-tag">Sweet Cream (+$0.75)</span>
+                            <span class="option-tag">Vanilla (+$0.75)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Mocha</span>
+                        <span class="item-price">$5.50</span>
+                    </div>
+                    <p class="item-description">Rich chocolate combined with espresso and steamed milk.</p>
+                    <div class="item-options">
+                        <span class="option-label">Chocolate:</span>
+                        <div class="option-list">
+                            <span class="option-tag">Dark</span>
+                            <span class="option-tag">Milk</span>
+                            <span class="option-tag">White</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Flat White</span>
+                        <span class="item-price">$4.95</span>
+                    </div>
+                    <p class="item-description">Double shot of espresso with microfoam. Bold and velvety.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pastries Menu -->
+        <section id="pastries" class="menu-category">
+            <div class="category-header">
+                <h2 class="category-title">Fresh Pastries</h2>
+                <p class="category-description">Baked fresh daily using traditional French techniques</p>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Croissant</span>
+                        <span class="item-price">$4.25</span>
+                    </div>
+                    <p class="item-description">Buttery, flaky, hand-laminated perfection.</p>
+                    <div class="item-options">
+                        <span class="option-label">Varieties:</span>
+                        <div class="option-list">
+                            <span class="option-tag">Plain</span>
+                            <span class="option-tag">Chocolate (+$0.75)</span>
+                            <span class="option-tag">Almond (+$1)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Pain au Chocolat</span>
+                        <span class="item-price">$4.75</span>
+                    </div>
+                    <p class="item-description">Flaky pastry with rich dark chocolate batons.</p>
+                </div>
+
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Fruit Danish</span>
+                        <span class="item-price">$4.95</span>
+                    </div>
+                    <p class="item-description">Delicate pastry with seasonal fruit and cream cheese.</p>
+                    <div class="item-options">
+                        <span class="option-label">Flavors:</span>
+                        <div class="option-list">
+                            <span class="option-tag">Blueberry</span>
+                            <span class="option-tag">Raspberry</span>
+                            <span class="option-tag">Apricot</span>
+                            <span class="option-tag">Cherry</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Cinnamon Roll</span>
+                        <span class="item-price">$5.25</span>
+                    </div>
+                    <p class="item-description">Soft, gooey, and topped with cream cheese frosting.</p>
+                    <div class="item-options">
+                        <span class="option-label">Options:</span>
+                        <div class="option-list">
+                            <span class="option-tag">Classic</span>
+                            <span class="option-tag">Pecan (+$1)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Muffin</span>
+                        <span class="item-price">$3.95</span>
+                    </div>
+                    <p class="item-description">Moist and flavorful, baked fresh every morning.</p>
+                    <div class="item-options">
+                        <span class="option-label">Flavors:</span>
+                        <div class="option-list">
+                            <span class="option-tag">Blueberry</span>
+                            <span class="option-tag">Lemon Poppy</span>
+                            <span class="option-tag">Double Chocolate</span>
+                            <span class="option-tag">Banana Nut</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Scone</span>
+                        <span class="item-price">$4.50</span>
+                    </div>
+                    <p class="item-description">Buttery British-style scone, perfect with clotted cream.</p>
+                    <div class="item-options">
+                        <span class="option-label">Varieties:</span>
+                        <div class="option-list">
+                            <span class="option-tag">Plain</span>
+                            <span class="option-tag">Cranberry Orange</span>
+                            <span class="option-tag">Chocolate Chip</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Breakfast Menu -->
+        <section id="breakfast" class="menu-category">
+            <div class="category-header">
+                <h2 class="category-title">Breakfast</h2>
+                <p class="category-description">Start your day right with our hearty breakfast options</p>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Avocado Toast</span>
+                        <span class="item-price">$9.50</span>
+                    </div>
+                    <p class="item-description">Artisan sourdough with smashed avocado, cherry tomatoes, and olive oil.</p>
+                    <div class="item-options">
+                        <span class="option-label">Add-ons:</span>
+                        <div class="option-list">
+                            <span class="option-tag">Poached Egg (+$2)</span>
+                            <span class="option-tag">Feta (+$1.50)</span>
+                            <span class="option-tag">Smoked Salmon (+$3)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Breakfast Sandwich</span>
+                        <span class="item-price">$8.95</span>
+                    </div>
+                    <p class="item-description">Egg, cheese, and your choice of protein on fresh bread.</p>
+                    <div class="item-options">
+                        <span class="option-label">Bread:</span>
+                        <div class="option-list">
+                            <span class="option-tag">Croissant</span>
+                            <span class="option-tag">Bagel</span>
+                            <span class="option-tag">Ciabatta</span>
+                        </div>
+                    </div>
+                    <div class="item-options">
+                        <span class="option-label">Protein:</span>
+                        <div class="option-list">
+                            <span class="option-tag">Bacon</span>
+                            <span class="option-tag">Sausage</span>
+                            <span class="option-tag">Ham</span>
+                            <span class="option-tag">Turkey</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Yogurt Parfait</span>
+                        <span class="item-price">$7.50</span>
+                    </div>
+                    <p class="item-description">Greek yogurt layered with granola and fresh berries.</p>
+                    <div class="item-options">
+                        <span class="option-label">Toppings:</span>
+                        <div class="option-list">
+                            <span class="option-tag">Honey</span>
+                            <span class="option-tag">Nuts (+$1)</span>
+                            <span class="option-tag">Extra Fruit (+$1.50)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>French Toast</span>
+                        <span class="item-price">$10.95</span>
+                    </div>
+                    <p class="item-description">Thick-cut brioche, cinnamon-spiced, with maple syrup.</p>
+                    <div class="item-options">
+                        <span class="option-label">Add-ons:</span>
+                        <div class="option-list">
+                            <span class="option-tag">Fresh Berries (+$2)</span>
+                            <span class="option-tag">Whipped Cream (+$1)</span>
+                            <span class="option-tag">Bacon (+$2.50)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lunch Menu -->
+        <section id="lunch" class="menu-category">
+            <div class="category-header">
+                <h2 class="category-title">Lunch Selections</h2>
+                <p class="category-description">Fresh sandwiches and salads made to order</p>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Caprese Sandwich</span>
+                        <span class="item-price">$11.50</span>
+                    </div>
+                    <p class="item-description">Fresh mozzarella, tomatoes, basil pesto on ciabatta.</p>
+                    <div class="item-options">
+                        <span class="option-label">Add:</span>
+                        <div class="option-list">
+                            <span class="option-tag">Prosciutto (+$3)</span>
+                            <span class="option-tag">Grilled Chicken (+$2.50)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Turkey Club</span>
+                        <span class="item-price">$12.50</span>
+                    </div>
+                    <p class="item-description">Roasted turkey, bacon, lettuce, tomato, mayo on whole grain.</p>
+                </div>
+
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Grilled Chicken Caesar Salad</span>
+                        <span class="item-price">$11.95</span>
+                    </div>
+                    <p class="item-description">Romaine, parmesan, croutons, house-made Caesar dressing.</p>
+                    <div class="item-options">
+                        <span class="option-label">Protein Options:</span>
+                        <div class="option-list">
+                            <span class="option-tag">Grilled Chicken</span>
+                            <span class="option-tag">Salmon (+$2)</span>
+                            <span class="option-tag">No Protein (-$3)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Quiche of the Day</span>
+                        <span class="item-price">$9.95</span>
+                    </div>
+                    <p class="item-description">Buttery crust with seasonal vegetables and cheese. Served with side salad.</p>
+                </div>
+
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Soup & Sandwich Combo</span>
+                        <span class="item-price">$13.95</span>
+                    </div>
+                    <p class="item-description">Cup of soup with half sandwich of your choice.</p>
+                    <div class="item-options">
+                        <span class="option-label">Soup Daily:</span>
+                        <div class="option-list">
+                            <span class="option-tag">Tomato Basil</span>
+                            <span class="option-tag">French Onion</span>
+                            <span class="option-tag">Seasonal Special</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Desserts Menu -->
+        <section id="desserts" class="menu-category">
+            <div class="category-header">
+                <h2 class="category-title">Desserts & Sweets</h2>
+                <p class="category-description">Indulgent treats for your sweet tooth</p>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Macaron</span>
+                        <span class="item-price">$2.50</span>
+                    </div>
+                    <p class="item-description">Delicate French almond cookies with buttercream filling.</p>
+                    <div class="item-options">
+                        <span class="option-label">Flavors:</span>
+                        <div class="option-list">
+                            <span class="option-tag">Vanilla</span>
+                            <span class="option-tag">Chocolate</span>
+                            <span class="option-tag">Pistachio</span>
+                            <span class="option-tag">Raspberry</span>
+                            <span class="option-tag">Lemon</span>
+                            <span class="option-tag">Lavender</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Éclair</span>
+                        <span class="item-price">$5.95</span>
+                    </div>
+                    <p class="item-description">Choux pastry filled with cream and topped with chocolate.</p>
+                    <div class="item-options">
+                        <span class="option-label">Flavors:</span>
+                        <div class="option-list">
+                            <span class="option-tag">Classic Chocolate</span>
+                            <span class="option-tag">Vanilla</span>
+                            <span class="option-tag">Coffee</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Tart of the Day</span>
+                        <span class="item-price">$6.50</span>
+                    </div>
+                    <p class="item-description">Fresh fruit tart with pastry cream on buttery crust.</p>
+                </div>
+
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Tiramisu</span>
+                        <span class="item-price">$7.50</span>
+                    </div>
+                    <p class="item-description">Classic Italian dessert with espresso-soaked ladyfingers and mascarpone.</p>
+                </div>
+
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Cheesecake</span>
+                        <span class="item-price">$6.95</span>
+                    </div>
+                    <p class="item-description">Creamy New York-style cheesecake.</p>
+                    <div class="item-options">
+                        <span class="option-label">Toppings:</span>
+                        <div class="option-list">
+                            <span class="option-tag">Plain</span>
+                            <span class="option-tag">Strawberry</span>
+                            <span class="option-tag">Caramel</span>
+                            <span class="option-tag">Chocolate</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Cannoli</span>
+                        <span class="item-price">$5.50</span>
+                    </div>
+                    <p class="item-description">Crispy shell filled with sweet ricotta cream.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Beverages Menu -->
+        <section id="beverages" class="menu-category">
+            <div class="category-header">
+                <h2 class="category-title">Other Beverages</h2>
+                <p class="category-description">Teas, smoothies, and specialty drinks</p>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Matcha Latte</span>
+                        <span class="item-price">$5.50</span>
+                    </div>
+                    <p class="item-description">Ceremonial grade matcha whisked with steamed milk.</p>
+                    <div class="item-options">
+                        <span class="option-label">Options:</span>
+                        <div class="option-list">
+                            <span class="option-tag">Hot</span>
+                            <span class="option-tag">Iced</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Premium Tea</span>
+                        <span class="item-price">$4.25</span>
+                    </div>
+                    <p class="item-description">Loose leaf teas steeped to perfection.</p>
+                    <div class="item-options">
+                        <span class="option-label">Varieties:</span>
+                        <div class="option-list">
+                            <span class="option-tag">English Breakfast</span>
+                            <span class="option-tag">Earl Grey</span>
+                            <span class="option-tag">Green Tea</span>
+                            <span class="option-tag">Chamomile</span>
+                            <span class="option-tag">Peppermint</span>
+                            <span class="option-tag">Chai</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Hot Chocolate</span>
+                        <span class="item-price">$4.95</span>
+                    </div>
+                    <p class="item-description">Rich, creamy, made with real Belgian chocolate.</p>
+                    <div class="item-options">
+                        <span class="option-label">Add-ons:</span>
+                        <div class="option-list">
+                            <span class="option-tag">Whipped Cream (+$0.75)</span>
+                            <span class="option-tag">Marshmallows (+$0.50)</span>
+                            <span class="option-tag">Peppermint (+$0.50)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Smoothie</span>
+                        <span class="item-price">$7.50</span>
+                    </div>
+                    <p class="item-description">Fresh fruit blended with yogurt or juice.</p>
+                    <div class="item-options">
+                        <span class="option-label">Flavors:</span>
+                        <div class="option-list">
+                            <span class="option-tag">Berry Blast</span>
+                            <span class="option-tag">Tropical Mango</span>
+                            <span class="option-tag">Green Energy</span>
+                            <span class="option-tag">Peanut Butter Banana</span>
+                        </div>
+                    </div>
+                    <div class="item-options">
+                        <span class="option-label">Boosts (+$1.50):</span>
+                        <div class="option-list">
+                            <span class="option-tag">Protein</span>
+                            <span class="option-tag">Chia Seeds</span>
+                            <span class="option-tag">Spirulina</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Fresh Juice</span>
+                        <span class="item-price">$6.50</span>
+                    </div>
+                    <p class="item-description">Cold-pressed daily.</p>
+                    <div class="item-options">
+                        <span class="option-label">Varieties:</span>
+                        <div class="option-list">
+                            <span class="option-tag">Orange</span>
+                            <span class="option-tag">Apple</span>
+                            <span class="option-tag">Carrot</span>
+                            <span class="option-tag">Green Detox</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-card">
+                    <div class="item-name">
+                        <span>Italian Soda</span>
+                        <span class="item-price">$4.50</span>
+                    </div>
+                    <p class="item-description">Sparkling water with flavored syrup.</p>
+                    <div class="item-options">
+                        <span class="option-label">Flavors:</span>
+                        <div class="option-list">
+                            <span class="option-tag">Raspberry</span>
+                            <span class="option-tag">Vanilla</span>
+                            <span class="option-tag">Peach</span>
+                            <span class="option-tag">Lavender</span>
+                        </div>
+                    </div>
+                    <div class="item-options">
+                        <span class="option-label">Add:</span>
+                        <div class="option-list">
+                            <span class="option-tag">Cream (+$1)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Special Offers -->
+    <section class="special-offers">
+        <h2>Daily Specials & Offers</h2>
+        <div class="offers-grid">
+            <div class="offer-card">
+                <h3>☀️ Morning Special</h3>
+                <p>Any coffee + pastry combo for $8.50<br><em>Available until 11 AM daily</em></p>
+            </div>
+            <div class="offer-card">
+                <h3>🥪 Lunch Deal</h3>
+                <p>Any sandwich + drink for $14.95<br><em>Monday - Friday, 11 AM - 3 PM</em></p>
+            </div>
+            <div class="offer-card">
+                <h3>🍰 Sweet Thursday</h3>
+                <p>Buy 2 desserts, get 1 free<br><em>Every Thursday</em></p>
+            </div>
+            <div class="offer-card">
+                <h3>💳 Loyalty Card</h3>
+                <p>Buy 10 coffees, get 1 free<br><em>Ask staff for your card today!</em></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Store Info -->
+    <section class="store-info" id="contact">
+        <div class="info-grid">
+            <div class="info-block">
+                <h3>Hours</h3>
+                <p><strong>Monday - Friday:</strong> 7:00 AM - 8:00 PM</p>
+                <p><strong>Saturday:</strong> 8:00 AM - 9:00 PM</p>
+                <p><strong>Sunday:</strong> 8:00 AM - 7:00 PM</p>
+                <p style="margin-top: 1.5rem;"><em>Extended hours on weekends for your convenience</em></p>
+            </div>
+            <div class="info-block">
+                <h3>Location</h3>
+                <p>123 Main Street</p>
+                <p>Downtown District</p>
+                <p>Your City, State 12345</p>
+                <p style="margin-top: 1rem;"><a href="#">📍 Get Directions</a></p>
+                <p><a href="#">🅿️ Parking Information</a></p>
+            </div>
+            <div class="info-block">
+                <h3>Contact Us</h3>
+                <p><strong>Phone:</strong> <a href="tel:555-0123">(555) 123-4567</a></p>
+                <p><strong>Email:</strong> <a href="mailto:info@lepetitcafe.com">info@lepetitcafe.com</a></p>
+                <p style="margin-top: 1.5rem;"><strong>Follow Us:</strong></p>
+                <div class="social-links">
+                    <a href="#">Instagram</a>
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 Le Petit Café. All rights reserved.</p>
+        <p style="margin-top: 0.5rem;">Crafted with ❤️ and the finest ingredients</p>
+    </footer>
+
+</body>
+</html>
